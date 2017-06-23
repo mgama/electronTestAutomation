@@ -1,0 +1,31 @@
+Here are the details of solving the problem to connect to a local electron app:
+1 - First of all, download the chromedriver
+2 - The chromedriver must be start on a terminal, with a command like this: 
+
+./chromedriver --url-base=/wd/hub
+
+The arguments (--url-base=/wd/hub) are really important since it gave me trouble to connect with webdriverio. Here is a post that got me thru this: http://stackoverflow.com/questions/18389419/selenium-webdriverjs-cannot-build-webdriver-for-chrome
+
+3 - Once you created the electron app, put everything under a folder called 'app' and copied it to the following location under: electron/Electron.app/Contents/Resources/app 
+
+This helped me out: 
+
+https://github.com/atom/electron/blob/master/docs/tutorial/application-distribution.md
+
+4 -  Make a folder and install webdriverio: 
+
+http://webdriver.io/guide/getstarted/install.html
+
+5 - Create the test and setup the chromedriver to point to the electron app. For this, I use your recommended site (yesterday I show you the demo using webdriver js, today script is using webdriverio): 
+
+https://github.com/atom/electron/blob/master/docs/tutorial/using-selenium-and-webdriver.md
+
+6 - To run the test, once chromedriver server has been started (as stated on step 2), then on your folder where you have webdriverio, use this command:
+
+node <name/path of the test> 
+7 - Expect to see Electron pop up with the app and the test run 
+
+Learnings from the exercise: 
+- I tried to go very simple with the electron app, so all my code is on the index.html file. I created the buttons with html and just the interactivity with javascript to change the value of the textbox. 
+- The first try with Mocha and Selenium WebdriverJS kind of worked, but I got stuck with not having proper handling of indefinite pauses. Apart that the syntax can get really long in comparison with nigthwatchjs or WebdriverIO.
+- WebdriverIO is way superior than plain mocha and selenium webdriverjs. I tried installing nightwatch on my local machine and configure it, but after 1 hour of troubleshooting I gave up. WebdriverIO is on pair with nightwatchjs and it does have a very good library to set up the tests. I think it is a good tool for running tests against electron apps, the syntax is cleaner and it has a good API. 
